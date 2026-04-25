@@ -2,12 +2,12 @@ import streamlit as st
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-MODEL_PATH = "./sentiment_model"
+MODEL_NAME = "Sofia0331/sentiment_model"
 
 @st.cache_resource
 def load_model():
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-    model = AutoModelForSequenceClassification.from_pretrained(MODEL_PATH)
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+    model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME)
     return tokenizer, model
 
 tokenizer, model = load_model()
@@ -33,10 +33,10 @@ def predict_sentiment(text):
 
     return labels[pred]
 
-st.title("Sentiment Analysis App")
-st.write("Enter text and predict sentiment.")
+st.title("Product Review Sentiment Analyser")
+st.write("Enter your review and predict sentiment.")
 
-user_text = st.text_area("Your Text:")
+user_text = st.text_area("Your Review:")
 
 if st.button("Predict"):
     if user_text.strip() == "":
